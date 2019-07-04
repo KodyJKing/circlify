@@ -10,6 +10,8 @@ var imageScale = 2
 var maxDetail = 100000 * 0.5
 var pairRadiusScanFactor = 1.01
 
+var circlesPerFrame = 1000
+
 var backgroundColor = 0
 
 function setup() {
@@ -17,7 +19,8 @@ function setup() {
     background( backgroundColor )
     noFill()
 
-    initImage()
+    imageData = getImageData( img, imageScale )
+    detailInfo = new DetailInfo( imageData )
 
     let centerX = width / 2;
     let centerY = height / 2;
@@ -31,19 +34,8 @@ function setup() {
     addCircle( B )
 }
 
-function initImage() {
-    let canvas = document.createElement( "canvas" )
-    canvas.width = width
-    canvas.height = height
-    let ctx = canvas.getContext( "2d" )
-    ctx.scale( imageScale, imageScale )
-    ctx.drawImage( img, 0, 0 )
-    imageData = ctx.getImageData( 0, 0, width, height )
-    detailInfo = new DetailInfo( imageData )
-}
-
 function draw() {
-    for ( var i = 0; i < 100; i++ ) {
+    for ( var i = 0; i < circlesPerFrame; i++ ) {
         if ( pairs.length == 0 ) {
             noLoop()
             break
@@ -138,9 +130,4 @@ function detail( pos, radius ) {
     let r = Math.round( radius )
 
     return detailInfo.detailInBox( x, y, r )
-}
-
-
-function outOfBounds( a ) {
-    return a.x < 0 || a.x >= width || a.y < 0 || a.y >= height
 }

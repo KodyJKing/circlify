@@ -33,3 +33,17 @@ function circleContains( x, y, radius, pt ) {
 	var diff = sub( vec( x, y ), pt )
 	return diff.magSq() < radius * radius
 }
+
+function outOfBounds( a ) {
+	return !rectContains( 0, 0, width, height, a )
+}
+
+function getImageData( image, scale ) {
+	let canvas = document.createElement( "canvas" )
+	canvas.width = image.width * scale
+	canvas.height = image.height * scale
+	let ctx = canvas.getContext( "2d" )
+	ctx.scale( scale, scale )
+	ctx.drawImage( image, 0, 0 )
+	return ctx.getImageData( 0, 0, canvas.width, canvas.height )
+}
