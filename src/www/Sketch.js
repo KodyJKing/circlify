@@ -9,6 +9,7 @@ var maxRadius = 400
 var imageScale = 2
 var maxDetail = 100000 * 0.5
 var pairRadiusScanFactor = 1.01
+var radiusBinarySearchSteps = 32
 
 var circlesPerFrame = 1000
 
@@ -58,7 +59,7 @@ function generateCircle() {
 
     // Binary search for ideal radius. 
     // We don't want to collide or enclose too much detail.
-    for ( let i = 0; i < 20; i++ ) {
+    for ( let i = 0; i < radiusBinarySearchSteps; i++ ) {
         radius = ( low + high ) / 2
         let n = neighborCircles( radius, pair.a, pair.b )
         circle = n[ side ]
