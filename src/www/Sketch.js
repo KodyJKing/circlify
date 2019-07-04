@@ -31,8 +31,8 @@ function setup() {
         }
     } )
 
-    let centerX = width / 2;
-    let centerY = height / 2;
+    let centerX = width / 2
+    let centerY = height / 2
 
     qtree = new QTree( 0, 0, width, height )
 
