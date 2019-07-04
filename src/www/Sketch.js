@@ -4,7 +4,7 @@ var detailInfo
 
 var DEBUG = false
 
-var minRadius = 2
+var minRadius = 1
 var maxRadius = 400
 var imageScale = 2
 var maxDetail = 100000 * 0.5
@@ -14,6 +14,7 @@ var radiusBinarySearchSteps = 32
 var circlesPerFrame = 1000
 
 var backgroundColor = 0
+var circleStyle = "outline" // solid | dark-ring | light-ring | just-ring | outline
 
 function setup() {
     createCanvas( img.width * imageScale, img.height * imageScale )

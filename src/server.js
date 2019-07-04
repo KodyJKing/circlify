@@ -6,6 +6,7 @@
     const port = 8080
 
     const imageUrl = "https://image3.mouthshut.com/images/imagesp/925016986s.jpg"
+    // const imageUrl = "https://cdn-images-1.medium.com/max/1600/1*ZbsHMqU7Sca96m9ctMWQIg.jpeg"
 
     app.set( "etag", false )
 
