@@ -5,8 +5,9 @@
     const app = express()
     const port = 8080
 
-    const imageUrl = "https://image3.mouthshut.com/images/imagesp/925016986s.jpg"
-    // const imageUrl = "https://cdn-images-1.medium.com/max/1600/1*ZbsHMqU7Sca96m9ctMWQIg.jpeg"
+    // const imageUrl = "https://image3.mouthshut.com/images/imagesp/925016986s.jpg"
+    // const imageUrl = "https://c402277.ssl.cf1.rackcdn.com/photos/907/images/hero_small/sumatran-tiger-hero_92514619.jpg?1345581518"
+    const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/687px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
 
     app.set( "etag", false )
 

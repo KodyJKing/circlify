@@ -1,19 +1,22 @@
 class DetailInfo {
-    constructor( imageData ) {
-        let pixels = imageData.data
+    constructor( imageData, options ) {
+        // let pixels = imageData.data
+        let pixels = DetailInfo.blurred( imageData, options.blur )
         let { height, width } = imageData
 
         this.detail = new Uint32Array( width * height )
+        this.width = width
+        this.height = height
 
         // Calculate cumulative detail for each row.
         for ( let y = 0; y < height; y++ ) {
             let sum = 0
             for ( let x = 0; x < width; x++ ) {
-                let _i = y * width + x                  // Index of the pixel in the output.
+                let _i = xyToIndex( x, y, width )           // Index of the pixel in the output.
 
-                let i = _i * 4                          // Index of the pixel in the original RGB image.
-                let j = ( ( y + 1 ) * width + x ) * 4   // Index of the y-successor.
-                let k = ( y * width + x + 1 ) * 4       // Index of the x-successor.
+                let i = _i * 4                              // Index of the pixel in the original RGB image.
+                let j = xyToIndex( x, y + 1, width ) * 4    // Index of the y-successor.
+                let k = xyToIndex( x + 1, y, width ) * 4    // Index of the x-successor.
 
                 // Detail at a pixel is defined as the square of the change in the successor pixel.
                 // This is calculated and added per RGB channel and per axis.
@@ -32,18 +35,74 @@ class DetailInfo {
         for ( let x = 0; x < width; x++ ) {
             let sum = 0
             for ( let y = 0; y < height; y++ ) {
-                let i = y * width + x
+                let i = xyToIndex( x, y, width )
                 sum += this.detail[ i ]
                 this.detail[ i ] = sum
             }
         }
     }
 
+    static blurred( imageData, options ) {
+        let { blurWidth, blurPasses } = options
+        let pixels = imageData.data
+
+        if ( blurPasses == 0 )
+            return pixels
+
+        let xPass = pixels.slice( 0 )
+        let { height, width } = imageData
+        let halfWidth = Math.floor( blurWidth / 2 )
+
+        for ( let pass = 0; pass < blurPasses; pass++ ) {
+            for ( let y = 0; y < height; y++ ) {
+                let sums = [ 0, 0, 0 ]
+                for ( let x = 0; x < width + halfWidth; x++ ) {
+                    let xStart = x - blurWidth
+                    let xMid = x - halfWidth
+                    for ( let c = 0; c < 3; c++ ) {
+                        if ( x < width )
+                            sums[ c ] += pixels[ xyToIndex( x, y, width ) * 4 + c ]
+                        if ( xStart >= 0 )
+                            sums[ c ] -= pixels[ xyToIndex( xStart, y, width ) * 4 + c ]
+                        if ( xMid >= 0 )
+                            xPass[ xyToIndex( xMid, y, width ) * 4 + c ] = sums[ c ] / blurWidth
+                    }
+                }
+            }
+        }
+
+        let result = xPass.slice( 0 )
+        for ( let pass = 0; pass < blurPasses; pass++ ) {
+            for ( let x = 0; x < width; x++ ) {
+                let sums = [ 0, 0, 0 ]
+                for ( let y = 0; y < height + halfWidth; y++ ) {
+                    let yStart = y - blurWidth
+                    let yMid = y - halfWidth
+                    for ( let c = 0; c < 3; c++ ) {
+                        if ( y < height )
+                            sums[ c ] += xPass[ xyToIndex( x, y, width ) * 4 + c ]
+                        if ( yStart >= 0 )
+                            sums[ c ] -= xPass[ xyToIndex( x, yStart, width ) * 4 + c ]
+                        if ( yMid >= 0 )
+                            result[ xyToIndex( x, yMid, width ) * 4 + c ] = sums[ c ] / blurWidth
+                    }
+                }
+            }
+        }
+
+        // for ( let i = 0; i < pixels.length; i++ )
+        //     pixels[ i ] = result[ i ]
+        // canvas.getContext( "2d" ).putImageData( imageData, 0, 0 )
+        // debugger
+
+        return result
+    }
+
     // Cumulative detail in the box ((0, 0), (x, y))
     getCumulativeDetail( x, y ) {
-        x = Math.max( 0, Math.min( x, width - 1 ) )
-        y = Math.max( 0, Math.min( y, height - 1 ) )
-        return this.detail[ y * width + x ]
+        x = Math.max( 0, Math.min( x, this.width - 1 ) )
+        y = Math.max( 0, Math.min( y, this.height - 1 ) )
+        return this.detail[ y * this.width + x ]
     }
 
     detailInBox( x, y, r ) {

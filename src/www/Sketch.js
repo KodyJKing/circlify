@@ -6,15 +6,17 @@ var DEBUG = false
 
 var minRadius = 1
 var maxRadius = 400
-var imageScale = 2
-var maxDetail = 100000 * 0.5
+var imageScale = 1
+var maxDetail = 100000 * 0.1
 var pairRadiusScanFactor = 1.01
 var radiusBinarySearchSteps = 32
+var detailBlurPasses = 10
+var detailBlurWidth = 5
 
-var circlesPerFrame = 1000
+var circlesPerFrame = 2000
 
-var backgroundColor = 0
-var circleStyle = "outline" // solid | dark-ring | light-ring | just-ring | outline
+var backgroundColor = 100
+var circleStyle = "solid" // solid | dark-ring | light-ring | just-ring | outline
 
 function setup() {
     createCanvas( img.width * imageScale, img.height * imageScale )
@@ -22,7 +24,12 @@ function setup() {
     noFill()
 
     imageData = getImageData( img, imageScale )
-    detailInfo = new DetailInfo( imageData )
+    detailInfo = new DetailInfo( imageData, {
+        blur: {
+            blurWidth: detailBlurWidth,
+            blurPasses: detailBlurPasses
+        }
+    } )
 
     let centerX = width / 2;
     let centerY = height / 2;

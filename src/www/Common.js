@@ -47,3 +47,7 @@ function getImageData( image, scale ) {
 	ctx.drawImage( image, 0, 0 )
 	return ctx.getImageData( 0, 0, canvas.width, canvas.height )
 }
+
+function xyToIndex( x, y, w ) {
+	return y * w + x
+}
