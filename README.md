@@ -2,7 +2,7 @@
 Recreate an image with circle packing.
 
 # Prerequisites
-Git, Node.js and Google Chrome (I haven't tested on other browsers.)
+Node.js and Google Chrome (I haven't tested on other browsers.)
 
 # Setup
 Clone the repository. CD into it. Run "npm install".
