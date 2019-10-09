@@ -62,31 +62,30 @@
             <textarea id="optionsInput" class="options" spellcheck="false">
 {
     // Min and max radius of circles.
-    "minRadius": 1,
-    "maxRadius": 400,
+        "minRadius": 1,
+        "maxRadius": 400,
 
     "imageScale": 1,
 
     // Use a valid css color or a brightness from 0 - 255.
-    "backgroundColor": 0,
+        "backgroundColor": 0,
 
-    // solid | dark-ring | light-ring | just-ring | outline
-    "circleStyle": "dark-ring",
+    // options: solid, dark-ring, light-ring, just-ring, outline
+        "circleStyle": "dark-ring",
 
     "paddingBetweenCircles": 0.5,
 
-    // How much "detail" can a single circle contain.
-    // Lower values yield more detailed images.
-    "maxDetail": 1000,
+    // How much "detail" can a single circle cover.
+        "maxDetail": 1000,
 
     // Quadratic gradient concentrates detail around high contrast areas like edges.
     // Linear gradient gives more even distribution.
-    // linear | quadratic
-    "gradientFunction": "linear",
+    // options: linear, quadratic
+        "gradientFunction": "linear",
 
     // Blur reduces noise in the image, leading to more even distribution of detail.
-    "detailBlurPasses": 10,
-    "detailBlurWidth": 5,
+        "detailBlurPasses": 10,
+        "detailBlurWidth": 5,
 
     "circlesPerFrame": 2000,
 
