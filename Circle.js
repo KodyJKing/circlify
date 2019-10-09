@@ -42,7 +42,7 @@ class Circle {
                 fill(color[0], color[1], color[2])
                 noStroke()
                 ellipse(this.pos.x, this.pos.y, r * 2)
-                fill(backgroundColor)
+                fill(options.backgroundColor)
                 ellipse(this.pos.x, this.pos.y, r * 1.5)
                 break
             }

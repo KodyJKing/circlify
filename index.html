@@ -67,27 +67,27 @@
 
     "imageScale": 1,
 
-    "maxDetail": 1000,
-
-    // linear | quadratic
-    "gradientFunction": "linear",
-
-    "pairRadiusScanFactor": 1.00001,
-
-    "radiusBinarySearchSteps": 32,
-
-    "detailBlurPasses": 10,
-
-    "detailBlurWidth": 5,
-
-    "circlesPerFrame": 2000,
-
     "backgroundColor": 0,
 
     // solid | dark-ring | light-ring | just-ring | outline
     "circleStyle": "dark-ring",
 
-    "paddingBetweenCircles": 0.5
+    "paddingBetweenCircles": 0.5,
+
+    "maxDetail": 1000,
+
+    // linear | quadratic
+    "gradientFunction": "linear",
+
+    "detailBlurPasses": 10,
+
+    "detailBlurWidth": 5,
+
+    "radiusBinarySearchSteps": 32,
+
+    "circlesPerFrame": 2000,
+
+    "pairScanFudgeFactor": 1.00001
 }</textarea> <br>
             <input type="file" id="imageInput"> <br>
             <button onclick="newImage()">Generate</button> <br>

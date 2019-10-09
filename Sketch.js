@@ -155,7 +155,7 @@ function neighborCircles(xRadius, y, z) {
 function addCircle(circle) {
     qtree.tryAdd(circle)
 
-    var scanCircle = new Circle(circle.pos.x, circle.pos.y, circle.radius * options.pairRadiusScanFactor)
+    var scanCircle = new Circle(circle.pos.x, circle.pos.y, circle.radius * options.pairScanFudgeFactor)
     var nearContacts = []
     qtree.contacts(scanCircle, nearContacts)
 
