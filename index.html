@@ -26,7 +26,7 @@
 
         .sidebar {
             height: 100vh;
-            width: 600px;
+            width: 800px;
             background-color: #272822;
             color: #f8f8f2;
             padding: 16px;
@@ -39,7 +39,7 @@
             color: #f8f8f2;
             max-width: 100%;
             width: 100%;
-            height: 500px;
+            height: 510px;
             font-family: Lucida Console;
             overflow: scroll;
             white-space: nowrap;
@@ -61,12 +61,13 @@
             Options: <br>
             <textarea id="optionsInput" class="options" spellcheck="false">
 {
+    // Min and max radius of circles.
     "minRadius": 1,
-
     "maxRadius": 400,
 
     "imageScale": 1,
 
+    // Use a valid css color or a brightness from 0 - 255.
     "backgroundColor": 0,
 
     // solid | dark-ring | light-ring | just-ring | outline
@@ -74,18 +75,22 @@
 
     "paddingBetweenCircles": 0.5,
 
+    // How much "detail" can a single circle contain.
+    // Lower values yield more detailed images.
     "maxDetail": 1000,
 
+    // Quadratic gradient concentrates detail around high contrast areas like edges.
+    // Linear gradient gives more even distribution.
     // linear | quadratic
     "gradientFunction": "linear",
 
+    // Blur reduces noise in the image, leading to more even distribution of detail.
     "detailBlurPasses": 10,
-
     "detailBlurWidth": 5,
 
-    "radiusBinarySearchSteps": 32,
-
     "circlesPerFrame": 2000,
+
+    "radiusBinarySearchSteps": 32,
 
     "pairScanFudgeFactor": 1.00001
 }</textarea> <br>
