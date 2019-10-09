@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Circlify</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="Common.js"></script>
+    <script src="Circle.js"></script>
+    <script src="QTree.js"></script>
+    <script src="Pair.js"></script>
+    <script src="DetailInfo.js"></script>
+    <script src="Sketch.js" type="text/javascript"></script>
+
+    <img id="img" src="" style="display: none">
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            height: 50vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: Lucida Console;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 600px;
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 16px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        .options {
+            background-color: #272822;
+            color: #f8f8f2;
+            max-width: 100%;
+            width: 100%;
+            height: 500px;
+            font-family: Lucida Console;
+            overflow: scroll;
+            white-space: nowrap;
+        }
+
+        .sketch {
+            background-color: black;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display:flex">
+        <div class="sidebar">
+            Options: <br>
+            <textarea id="optionsInput" class="options" spellcheck="false">
+{
+    "minRadius": 1,
+
+    "maxRadius": 400,
+
+    "imageScale": 1,
+
+    "maxDetail": 1000,
+
+    // linear | quadratic
+    "gradientFunction": "linear",
+
+    "pairRadiusScanFactor": 1.00001,
+
+    "radiusBinarySearchSteps": 32,
+
+    "detailBlurPasses": 10,
+
+    "detailBlurWidth": 5,
+
+    "circlesPerFrame": 2000,
+
+    "backgroundColor": 0,
+
+    // solid | dark-ring | light-ring | just-ring | outline
+    "circleStyle": "dark-ring",
+
+    "paddingBetweenCircles": 0.5
+}</textarea> <br>
+            <input type="file" id="imageInput"> <br>
+            <button onclick="newImage()">Generate</button> <br>
+            <button onclick="download()">Download</button>
+        </div>
+
+        <div id="sketch" class="sketch"></div>
+    </div>
+</body>
+
+</html>

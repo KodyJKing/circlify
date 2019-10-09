@@ -1,15 +1,10 @@
 {
-  "name": "servertemplate",
-  "version": "1.0.0",
+  "name": "circlify",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "nodemon src/server.js"
-  },
+  "scripts": {},
   "author": "KJK",
   "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1",
-    "request": "^2.88.0"
-  }
+  "dependencies": {}
 }
