@@ -1,5 +1,5 @@
 # Circlify
-Recreate an image with circle packing.
+Recreates images with circle packing algorithm.
 
 [Try Online](https://kodyjking.github.io/circlify/)
 
