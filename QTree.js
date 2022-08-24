@@ -16,7 +16,7 @@ class QTree {
 		this.depth = 0
 	}
 
-	contais( pt ) {
+	contains( pt ) {
 		return this.pos.x < pt.x && this.pos.x + this.w > pt.x
 			&& this.pos.y < pt.y && this.pos.y + this.h > pt.y
 	}
